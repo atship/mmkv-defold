@@ -1,17 +1,26 @@
-local mmdb = require('example/mmkv')
+
 function init(self)
 	mmkv.init(sys.get_save_file("my_game", "my_mmkv"))
-	local db = mmkv.open("wearewell");
+	
+	local db = mmkv.open("wearewell", "secret nowwelld0");
+
+	print("read last value " .. mmkv.getint(db, "verygood", 0))
+	
 	mmkv.setint(db, "verygood", 333)
 	print("very good is " .. mmkv.getint(db, "verygood", 0))
-	local ddb = mmdb.open('wearewell')
-	print('ddb number is ' .. ddb:getint('long', 0))
+	
 	mmkv.setint(db, 'long', 1234567890000)
 	print('long is ' .. mmkv.getint(db, 'long'))
+	
 	mmkv.setnumber(db, 'number', 12345.1234567890)
 	print('number is ' .. mmkv.getnumber(db, 'number', 0))
+	
+	mmkv.remove(db, 'number')
+	print('is db contains number? ' .. (mmkv.haskey(db, 'number') and 'yes' or 'no'))
+	
 	mmkv.setbool(db, 'bool', false)
 	print('bool is ' .. (mmkv.getbool(db, 'bool', true) and "true" or "false"))
+	
 	mmkv.setstring(db, 'str', 'master:getsockname()')
 	print('string is ' .. mmkv.getstring(db, "str"))
 end
