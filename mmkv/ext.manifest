@@ -1,0 +1,21 @@
+# C++ symbol in your extension
+name: "MMKV"
+
+platforms:
+    x86-win32:
+        context:
+            flags:   ["-std=c++17"]
+            defines: ["UNICODE", "_UNICODE"]
+            
+    x86_64-win32:
+        context:
+            flags:   ["-std=c++17"]
+            defines: ["UNICODE", "_UNICODE"]
+
+    arm64-android:
+        context:
+            flags: ["-std=c++17", "-fPIC", "-march=armv8+crypto"]
+
+    armv7-android:
+        context:
+            flags: ["-std=c++17", "-fPIC"]
