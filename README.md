@@ -9,11 +9,11 @@
 ## Usage:
 
 ```lua
-mmkv.init(sys.get_save_file("my_game", "my_mmkv"))
+mmkv.init(sys.get_save_file("my_game", "my_mmkv")[, debug = true or false])
 
-local db = mmkv.open('mydb', secret-key) 
+local db = mmkv.open('mydb'[, secret-key])
 -- or
-local db = mmkv.db(secret-key) -- get the default db
+local db = mmkv.db([secret-key]) -- get the default db
 -- secret-key length must <= 16 chars
 
 mmkv.setint(db, 'int', 320)
