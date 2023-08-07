@@ -3,8 +3,8 @@
 ## Support platforms
 - Windows 10
 - Android 21
-- iOS
-- MacOSX
+- iOS 16.2
+- MacOSX 12.6
 
 ## Usage:
 
