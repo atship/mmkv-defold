@@ -182,6 +182,24 @@ static int GetBuffer(lua_State* L)
     return 1;
 }
 
+static int HasKey(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    lua_pushboolean(L, db->containsKey(key));
+    return 1;
+}
+
+static int RemoveKey(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    db->removeValueForKey(key);
+    return 0;
+}
+
 static const luaL_reg Module_methods[] ={
     {"init", Init},
     {"db", DefaultDB},
@@ -196,6 +214,8 @@ static const luaL_reg Module_methods[] ={
     {"getbuff", GetBuffer},
     {"setstring", SetString},
     {"getstring", GetString},
+    {"haskey", HasKey},
+    {"remove", RemoveKey}
     {0, 0}
 };
 
