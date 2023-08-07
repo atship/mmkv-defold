@@ -215,7 +215,7 @@ static const luaL_reg Module_methods[] ={
     {"setstring", SetString},
     {"getstring", GetString},
     {"haskey", HasKey},
-    {"remove", RemoveKey}
+    {"remove", RemoveKey},
     {0, 0}
 };
 
