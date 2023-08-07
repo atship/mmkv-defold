@@ -11,7 +11,10 @@
 ```lua
 mmkv.init(sys.get_save_file("my_game", "my_mmkv"))
 
-local db = mmkv.open('mydb', secret-key) -- or db = mmkv.db(secret-key), the default db, secret-key length must <= 16 chars
+local db = mmkv.open('mydb', secret-key) 
+-- or
+local db = mmkv.db(secret-key) -- get the default db
+-- secret-key length must <= 16 chars
 
 mmkv.setint(db, 'int', 320)
 mmkv.setnumber(db, 'number', 123456789.89990)
