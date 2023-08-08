@@ -6,14 +6,16 @@ function init(self)
 
 	print("read last value " .. mmkv.getint(db, "verygood", 0))
 	
-	mmkv.setint(db, "verygood", 333)
-	print("very good is " .. mmkv.getint(db, "verygood", 0))
+	mmkv.setnumber(db, "verygood", 333)
+	print("very good is " .. mmkv.getnumber(db, "verygood", 0))
 	
-	mmkv.setint(db, 'long', 1234567890000)
-	print('long is ' .. mmkv.getint(db, 'long'))
+	mmkv.setnumber(db, 'long', 18446744073709551615)
+	print('long is ' .. mmkv.getnumber(db, 'long'))
+	print(mmkv.getnumber(db, 'long') == 18446744073709551615)
 	
-	mmkv.setnumber(db, 'number', 12345.1234567890)
+	mmkv.setnumber(db, 'number', 18446744073709551615)
 	print('number is ' .. mmkv.getnumber(db, 'number', 0))
+	print(mmkv.getnumber(db, 'number') == 18446744073709551615)
 	
 	mmkv.remove(db, 'number')
 	print('is db contains number? ' .. (mmkv.haskey(db, 'number') and 'yes' or 'no'))
