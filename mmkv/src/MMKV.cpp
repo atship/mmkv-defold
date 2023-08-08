@@ -75,11 +75,56 @@ static int GetInt(lua_State* L)
     DM_LUA_STACK_CHECK(L, 1);
     MMKV* db = (MMKV*)lua_touserdata(L, 1);
     const char* key = luaL_checkstring(L, 2);
-    lua_Number def = luaL_optnumber(L, 3, 0.0f);
+    int32_t def = luaL_optinteger(L, 3, 0);
     if (db->containsKey(key)){
-        lua_pushnumber(L, db->getInt64(key));
+        lua_pushinteger(L, db->getInt32(key));
     } else {
-        lua_pushnumber(L, def);
+        lua_pushinteger(L, def);
+    }
+    
+    return 1;
+}
+
+static int GetUInt(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    uint32_t def = luaL_optinteger(L, 3, 0);
+    if (db->containsKey(key)){
+        lua_pushinteger(L, db->getUInt32(key));
+    } else {
+        lua_pushinteger(L, def);
+    }
+    
+    return 1;
+}
+
+static int GetInt64(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    int64_t def = luaL_optinteger(L, 3, 0);
+    if (db->containsKey(key)){
+        lua_pushinteger(L, db->getInt64(key));
+    } else {
+        lua_pushinteger(L, def);
+    }
+    
+    return 1;
+}
+
+static int GetUInt64(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 1);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    uint64_t def = luaL_optinteger(L, 3, 0);
+    if (db->containsKey(key)){
+        lua_pushinteger(L, db->getUInt64(key));
+    } else {
+        lua_pushinteger(L, def);
     }
     
     return 1;
@@ -100,7 +145,37 @@ static int SetInt(lua_State* L)
     DM_LUA_STACK_CHECK(L, 0);
     MMKV* db = (MMKV*)lua_touserdata(L, 1);
     const char* key = luaL_checkstring(L, 2);
+    int32_t value = luaL_checkinteger(L, 3);
+    db->set(value, key);
+    return 0;
+}
+
+static int SetUInt(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    uint32_t value = luaL_checkinteger(L, 3);
+    db->set(value, key);
+    return 0;
+}
+
+static int SetInt64(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
     int64_t value = luaL_checkinteger(L, 3);
+    db->set(value, key);
+    return 0;
+}
+
+static int SetUInt64(lua_State* L)
+{
+    DM_LUA_STACK_CHECK(L, 0);
+    MMKV* db = (MMKV*)lua_touserdata(L, 1);
+    const char* key = luaL_checkstring(L, 2);
+    uint64_t value = luaL_checkinteger(L, 3);
     db->set(value, key);
     return 0;
 }
@@ -207,6 +282,12 @@ static const luaL_reg Module_methods[] ={
     {"setnumber", SetNumber},
     {"setint", SetInt},
     {"getint", GetInt},
+    {"setuint", SetUInt},
+    {"getuint", GetUInt},
+    {"setlong", SetInt64},
+    {"getlong", GetInt64},
+    {"setulong", SetUInt64},
+    {"getulong", GetUInt64},
     {"getnumber", GetDouble},
     {"getbool", GetBool},
     {"setbool", SetBool},
