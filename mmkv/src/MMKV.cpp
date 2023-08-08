@@ -100,7 +100,7 @@ static int SetInt(lua_State* L)
     DM_LUA_STACK_CHECK(L, 0);
     MMKV* db = (MMKV*)lua_touserdata(L, 1);
     const char* key = luaL_checkstring(L, 2);
-    lua_Integer value = luaL_checkinteger(L, 3);
+    int64_t value = luaL_checkinteger(L, 3);
     db->set(value, key);
     return 0;
 }
