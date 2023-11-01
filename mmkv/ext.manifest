@@ -24,7 +24,7 @@ platforms:
 
     arm64-android:
         context:
-            flags: ["-std=c++17", "-fPIC", "-march=armv8+crypto"]
+            flags: ["-std=c++17", "-fPIC"]
 
     armv7-android:
         context:
