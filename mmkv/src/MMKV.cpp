@@ -49,7 +49,11 @@ static int OpenDB(lua_State* L)
         db = MMKV::mmkvWithID(file, MMKV_SINGLE_PROCESS);
     } else {
         std::string key = cryptKey;
-        db = MMKV::mmkvWithID(file, MMKV_SINGLE_PROCESS, &key);
+        db = MMKV::mmkvWithID(file, 
+#ifdef MMKV_ANDROID
+            mmkv::DEFAULT_MMAP_SIZE,
+#endif
+            MMKV_SINGLE_PROCESS, &key);
     }
     lua_pushlightuserdata(L, db);
     return 1;
